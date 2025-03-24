@@ -5,7 +5,7 @@ _____ ____     _____       _ _ _
 |  _  |    \   |  _  |_ _ _| |_| |_
 |     |  |  |  |     | | | . | |  _|
 |__|__|____/   |__|__|___|___|_|_|
-                 by phillips321
+                 by vrushchitalia
 ```
 
 If you have any decent powershell one liners that could be used in the script please let me know. I'm trying to keep this script as a single file with no requirements on external tools (other than ntdsutil and cmd.exe)
@@ -13,61 +13,109 @@ If you have any decent powershell one liners that could be used in the script pl
 Run directly on a DC using a DA. If you don't trust the code I suggest reading it first and you'll see it's all harmless! (But shouldn't you be doing that anyway with code you download off the net and then run as DA??)
 
 ## What this does
-* Device Information
-  * Get-HostDetails
-* Domain Audit
-  * Get-LastWUDate
-  * Get-DCEval
-  * Get-TimeSource
-  * Get-PrivilegedGroupMembership
-  * Get-MachineAccountQuota
-  * Get-DefaultDomainControllersPolicy
-  * Get-SMB1Support
-  * Get-FunctionalLevel
-  * Get-DCsNotOwnedByDA
-  * Get-ReplicationType
-  * Get-RecycleBinState
-  * Get-CriticalServicesStatus
-  * Get-RODC
-* Domain Trust Audit
-  * Get-DomainTrusts
-* User Accounts Audit
-  * Get-InactiveAccounts
-  * Get-DisabledAccounts
-  * Get-LockedAccounts
-  * Get-AdminAccountChecks
-  * Get-NULLSessions
-  * Get-PrivilegedGroupAccounts
-  * Get-ProtectedUsers
-* Password Information Audit
-  * Get-AccountPassDontExpire
-  * Get-UserPasswordNotChangedRecently
-  * Get-PasswordPolicy
-  * Get-PasswordQuality
-* Dumps NTDS.dit
-  * Get-NTDSdit
-* Computer Objects Audit
-  * Get-OldBoxes
-* GPO audit (and checking SYSVOL for passwords)
-  * Get-GPOtoFile
-  * Get-GPOsPerOU
-  * Get-SYSVOLXMLS
-  * Get-GPOEnum
-* Check Generic Group AD Permissions
-  * Get-OUPerms
-* Check For Existence of LAPS in domain
-  * Get-LAPSStatus
-* Check For Existence of Authentication Polices and Silos
-  * Get-AuthenticationPoliciesAndSilos
-* Check for insecure DNS zones
-  * Get-DNSZoneInsecure
-* Check for newly created users and groups
-  * Get-RecentChanges
-* Check for ADCS vulnerabiltiies, ESC1,2,3,4 and 8. 
-* Check for high value kerberoastable accounts 
-* Check for ASREPRoastable accounts
-* Check for dangerous ACL permissions on Users, Groups and Computers. 
-* Check LDAP and LDAPs settings (Signing, null sessions etc )
+ 
+
+Device Information 
+
+Provides basic information about the computer, like its name, domain, user, Windows version, and IP addresses. 
+
+ 
+
+Domain Audit 
+
+Checks when the last Windows Update was installed on each domain controller and other update-related details. 
+
+Collects various details about domain controllers, like their OS versions and roles. 
+
+Checks the time source settings for each domain controller. 
+
+Lists members of important security groups. 
+
+Checks how many machines a regular user can add to the domain. 
+
+Reviews the security settings for domain controllers. 
+
+Checks if an older, less secure file-sharing protocol (SMB1) is enabled. 
+
+Reports the security level settings of the domain and forest. 
+
+Finds domain controllers not managed by Domain Admins. 
+
+Checks how domain controllers replicate data (using FRS or DFSR). 
+
+Checks if the Active Directory Recycle Bin is enabled. 
+
+Checks the status of critical services on domain controllers. 
+
+Lists Read-Only Domain Controllers (RODCs). 
+
+ 
+
+Domain Trust Audit 
+
+Reviews trust relationships between different domains. 
+
+ 
+
+User Accounts Audit 
+
+Finds user accounts that haven’t been used in 180 days. 
+
+Lists user accounts that are disabled. 
+
+Lists user accounts that are locked out. 
+
+Checks the status and security of the Administrator account. 
+
+Checks for vulnerabilities related to NULL sessions. 
+
+Lists accounts in important security groups with last logondate. 
+
+Lists accounts in the Protected Users group. 
+
+ 
+
+Replication Summary between DC’s 
+
+This will generate a replication summary and save it to a text file in the specified directory. 
+ 
+
+All GPO Names with Count 
+
+This will gather GPO names and count, save them to a text file in the specified directory. 
+
+ 
+
+AD Groups with Count 
+
+This will gather Group names and count, save them to a text file in the specified directory. 
+
+ 
+
+Host Based Firewall Details for DC’s 
+
+This provides an efficient way to gather and document the firewall profile settings for all domain controllers in an Active Directory environment. 
+
+ 
+
+Inactive Computers 
+
+This provides a list of computers which have been inactive for 180 days (about 6 months). 
+
+ 
+
+EmptyOUs 
+
+This searches for empty Organizational Units (OUs) within an Active Directory domain and saves them to a text file. 
+ 
+
+Password Information Audit 
+
+Lists accounts with passwords that never expire. 
+
+Finds accounts where passwords haven’t been changed in 90 days. 
+
+Reviews the domain’s password policy. 
 
 ## Runtime Args
 The following switches can be used in combination
