@@ -19,9 +19,7 @@ Run directly on a DC using a DA. If you don't trust the code I suggest reading i
 
 > Provides basic information about the computer, like its name, domain, user, Windows version, and IP addresses. 
 
- 
-
--Domain Audit 
+- Domain Audit 
 
 > Checks when the last Windows Update was installed on each domain controller and other update-related details. 
 
